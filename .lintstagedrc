@@ -1,0 +1,10 @@
+{
+  "linters": {
+    "src/**/*.js": ["npm run fix:obj", "prettier --write", "eslint --fix --max-warnings=0", "git add"],
+    "src/**/styled.js": ["stylelint --fix", "git add"],
+    "*.js": ["prettier --write", "eslint --fix --max-warnings=0", "git add"],
+    "*.sass": ["npm run lint:fix", "npm run lint ", "git add"]
+  },
+  "concurrent": false,
+  "ignore": [".eslintrc.js"]
+}

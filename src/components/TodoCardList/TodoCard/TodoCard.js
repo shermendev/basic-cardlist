@@ -1,12 +1,12 @@
 import React from 'react'
 import {
-  CardTitle, CardText, CardBody, Card, Col, CardHeader, Button
+  CardTitle, CardText, CardBody, Card, Col, CardHeader, Button 
 } from 'reactstrap'
 import PropTypes from 'prop-types'
-import styles from './TodoCard.module.sass'
+import { TodoCardContainer } from './styled'
 
 const TodoCard = ({
-  color, comment, id, onEdit, onRemove, title
+  color, comment, id, onEdit, onRemove, title 
 }) => {
   const hasTitle = Boolean(title)
   const hasComment = Boolean(comment)
@@ -14,7 +14,7 @@ const TodoCard = ({
 
   return (
     <Col className="mt-4">
-      <div className={styles.container}>
+      <TodoCardContainer>
         <Card className={`bg-${color} text-white`}>
           <CardHeader>{`Card #${id}`}</CardHeader>
           <CardBody className="d-flex flex-column">
@@ -30,7 +30,7 @@ const TodoCard = ({
             </div>
           </CardBody>
         </Card>
-      </div>
+      </TodoCardContainer>
     </Col>
   )
 }
@@ -44,4 +44,4 @@ TodoCard.propTypes = {
   title: PropTypes.string.isRequired
 }
 
-export default React.memo(TodoCard)
+export default TodoCard

@@ -1,6 +1,6 @@
 # About
 
-Simple card maker app to test react basic concepts.
+Simple card maker app to test basic React concepts.
 
 ## Link
 

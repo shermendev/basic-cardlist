@@ -1,9 +1,10 @@
 import React from 'react'
 import {
-  CardBody, Card, CardHeader, FormGroup, ButtonGroup, Input, Button
+  CardBody, Card, CardHeader, FormGroup, ButtonGroup, Input, Button 
 } from 'reactstrap'
 import PropTypes from 'prop-types'
-import styles from './CardMaker.module.sass'
+
+import { CardMakerContainer } from './styled'
 
 const CardMaker = ({
   color,
@@ -18,7 +19,7 @@ const CardMaker = ({
   onTitleChange,
   title
 }) => (
-  <div className={`${styles.wrap} m-auto`}>
+  <CardMakerContainer className="m-auto">
     <Card className="bg-light">
       <CardHeader>{isEditing ? `Edit Card #${id}` : `New Card`}</CardHeader>
       <CardBody>
@@ -27,7 +28,7 @@ const CardMaker = ({
         </FormGroup>
         <FormGroup>
           <Input
-            name="description"
+            name="comment"
             placeholder="Additional comment to your card"
             type="textarea"
             value={comment}
@@ -66,13 +67,13 @@ const CardMaker = ({
         </FormGroup>
       </CardBody>
     </Card>
-  </div>
+  </CardMakerContainer>
 )
 
 CardMaker.propTypes = {
   color: PropTypes.string.isRequired,
   comment: PropTypes.string.isRequired,
-  hasReachedLimit: PropTypes.bool,
+  hasReachedLimit: PropTypes.bool.isRequired,
   id: PropTypes.number,
   isEditing: PropTypes.bool,
   onAddNew: PropTypes.func,
@@ -84,11 +85,10 @@ CardMaker.propTypes = {
 }
 
 CardMaker.defaultProps = {
-  hasReachedLimit: false,
   id: 0,
   isEditing: false,
   onAddNew: () => {},
   onEditSubmit: () => {}
 }
 
-export default React.memo(CardMaker)
+export default CardMaker

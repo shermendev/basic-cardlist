@@ -1,12 +1,16 @@
 module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 6,
-    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
       modules: true
-    }
+    },
+    ecmaVersion: 6,
+    sourceType: 'module'
+  },
+  env: {
+    browser: true,
+    es6: true
   },
   plugins: ['css-modules', 'array-func', 'import', 'jsx-a11y', 'promise', 'react', 'sort-destructure-keys', 'unicorn'],
   extends: [
@@ -22,9 +26,20 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:unicorn/recommended'
   ],
-  env: {
-    es6: true,
-    browser: true
+  settings: {
+    'import/resolver': {
+      alias: [
+        ['Hoc', './src/hoc/'],
+        ['Components', './src/components/'],
+        ['RenderProps', './src/render-props/'],
+        ['Pages', './src/pages/'],
+        ['Containers', './src/containers/'],
+        ['Img', './src/assets/img/'],
+        ['Icons', './src/assets/img/icons/'],
+        ['Store', './src/store/'],
+        ['Utils', './src/utils/']
+      ]
+    }
   },
   rules: {
     'import/no-extraneous-dependencies': 0
@@ -33,6 +48,8 @@ module.exports = {
     {
       files: ['src/**/*.js'],
       rules: {
+        'react/display-name': 0,
+        'array-func/prefer-array-from': 0,
         'arrow-body-style': [
           1,
           'as-needed',
@@ -47,7 +64,8 @@ module.exports = {
             minItems: 5
           }
         ],
-        'import/no-extraneous-dependencies': 1,
+        'import/no-extraneous-dependencies': [1, { devDependencies: ['**/ReactotronConfig.js'] }],
+        'import/prefer-default-export': 0,
         indent: [
           1,
           2,
@@ -56,25 +74,26 @@ module.exports = {
           }
         ],
         'lines-between-class-members': 1,
+        'no-console': 1,
         'no-else-return': 1,
         'object-curly-newline': [
           1,
           {
+            ExportDeclaration: {
+              minProperties: 5,
+              multiline: true
+            },
             ImportDeclaration: {
-              multiline: true,
-              minProperties: 5
+              minProperties: 5,
+              multiline: true
             },
             ObjectExpression: {
-              multiline: true,
-              minProperties: 1
+              minProperties: 1,
+              multiline: true
             },
             ObjectPattern: {
-              multiline: true,
-              minProperties: 5
-            },
-            ExportDeclaration: {
-              multiline: true,
-              minProperties: 5
+              minProperties: 5,
+              multiline: true
             }
           }
         ],
@@ -82,23 +101,28 @@ module.exports = {
           1,
           {
             blankLine: 'always',
-            prev: ['const', 'let', 'var', 'if', 'import', 'function', 'class', 'export', 'switch', 'for'],
-            next: '*'
+            next: '*',
+            prev: ['const', 'let', 'var', 'if', 'import', 'function', 'class', 'export', 'switch', 'for']
           },
           {
             blankLine: 'always',
-            prev: '*',
-            next: ['const', 'let', 'var', 'return', 'if', 'function', 'class', 'export', 'switch', 'for']
+            next: ['const', 'let', 'var', 'return', 'if', 'function', 'class', 'export', 'switch', 'for'],
+            prev: '*'
           },
           {
             blankLine: 'any',
-            prev: ['const', 'let', 'var'],
-            next: ['const', 'let', 'var']
+            next: ['const', 'let', 'var'],
+            prev: ['const', 'let', 'var']
           },
           {
             blankLine: 'any',
-            prev: 'import',
-            next: 'import'
+            next: 'import',
+            prev: 'import'
+          },
+          {
+            blankLine: 'any',
+            next: 'export',
+            prev: 'export'
           }
         ],
         quotes: [1, 'backtick'],
@@ -107,21 +131,22 @@ module.exports = {
         'react/jsx-sort-props': [
           1,
           {
-            reservedFirst: true,
             callbacksLast: true,
+            reservedFirst: true,
             shorthandFirst: true
           }
         ],
         'react/no-array-index-key': 0,
+        'react/prop-types': [2, { ignore: ['children'] }],
         'sort-destructure-keys/sort-destructure-keys': 1,
         'sort-keys': 1,
         'unicorn/filename-case': 0,
         'unicorn/prefer-spread': 0,
-        // FIXME: bug when using destruction for state https://github.com/yannickcr/eslint-plugin-react/issues/1697
-        'react/no-unused-state': 0,
         // cssCheckbox library breaks with nesting
         'jsx-a11y/label-has-associated-control': 0,
-        'jsx-a11y/label-has-for': 0
+        'jsx-a11y/label-has-for': 0,
+        // FIXME: bug when using destruction for state https://github.com/yannickcr/eslint-plugin-react/issues/1697
+        'react/no-unused-state': 0
       }
     }
   ]

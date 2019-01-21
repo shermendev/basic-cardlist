@@ -1,36 +1,29 @@
 import React from 'react'
-import { Row } from 'reactstrap'
+import { Row, Container } from 'reactstrap'
 import PropTypes from 'prop-types'
-import TodoCard from './TodoCard/TodoCard'
+import TodoCard from './TodoCard'
 
-const TodoCardList = ({ ascending, list, onEdit, onRemove }) => {
+const TodoCardList = ({ list }) => {
   const todoCardList =
     list &&
     list.map(item => (
-      <TodoCard
-        key={item.id}
-        color={item.color}
-        comment={item.comment}
-        id={item.id}
-        title={item.title}
-        onEdit={onEdit}
-        onRemove={onRemove}
-      />
+      <TodoCard key={item.id} color={item.color} comment={item.comment} id={item.id} title={item.title} />
     ))
 
-  return <Row>{ascending ? todoCardList : todoCardList.reverse()}</Row>
+  return (
+    <Container>
+      <Row>{todoCardList}</Row>
+    </Container>
+  )
 }
 
 TodoCardList.propTypes = {
-  ascending: PropTypes.bool.isRequired,
   list: PropTypes.arrayOf(PropTypes.shape({
     color: PropTypes.string.isRequired,
     comment: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired
-  })).isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired
+  })).isRequired
 }
 
-export default React.memo(TodoCardList)
+export default TodoCardList
