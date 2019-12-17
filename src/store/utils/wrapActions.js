@@ -1,16 +1,17 @@
-const wrapAction = stateToMerge => (state, { payload: props }) => {
+const wrapAction = action => (state, { payload: props }) => {
   return {
     ...state,
-    ...stateToMerge(state, props)
+    ...action(state, props)
   }
 }
 
 export const wrapActions = (actionsToWrap, actionsUntouched) => {
-  const wrappedActions = {}
-
-  for (const [actionName, action] of Object.entries(actionsToWrap)) {
-    wrappedActions[actionName] = wrapAction(action)
-  }
+  const wrappedActions = Object.entries(actionsToWrap).reduce((accumulator, [actionName, action]) => {
+    return {
+      ...accumulator,
+      [actionName]: wrapAction(action)
+    }
+  }, {})
 
   return {
     ...wrappedActions,

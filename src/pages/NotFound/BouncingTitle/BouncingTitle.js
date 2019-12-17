@@ -1,6 +1,7 @@
 import React from 'react'
-import { AddToggler } from 'RenderProps'
-import { ErrorTitle, AnimationToggler, AnimationTogglerIcon } from './styled'
+import { AddToggler } from '~renderProps'
+import { ErrorTitle, AnimationToggler } from './styled'
+import AnimationTogglerIcon from './AnimationTogglerIcon'
 
 const BouncingTitle = () => (
   <AddToggler

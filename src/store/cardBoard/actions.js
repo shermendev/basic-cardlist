@@ -1,7 +1,7 @@
-import { getRandomColor, getRandomPostId } from 'Utils/random'
 import axios from 'axios'
 import { createActions } from 'redux-actions'
 import to from 'await-to-js'
+import { getRandomColor, getRandomPostId } from '~utils/random'
 
 export const {
   addNew,
@@ -60,7 +60,9 @@ export const {
 })
 
 export const preFetchNew = () => async (dispatch, getState) => {
-  const {cardBoard: { fetcherColor }} = getState()
+  const {
+    cardBoard: { fetcherColor }
+  } = getState()
 
   dispatch(setFetcherColor(getRandomColor()))
 

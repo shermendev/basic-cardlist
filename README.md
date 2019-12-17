@@ -1,7 +1,7 @@
 # About
 
-Simple card maker app to test basic React concepts.
+Simple card maker app with React, Redux and Styled-Components.
 
 ## Link
 
-[https://shermendev.github.io/basic-cardlist/](https://shermendev.github.io/basic-cardlist/)
+[https://shermendev.gitlab.io/cardboard/](https://shermendev.gitlab.io/cardboard/)

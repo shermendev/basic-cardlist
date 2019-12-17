@@ -1,10 +1,8 @@
 import React from 'react'
-import {
-  CardBody, Card, CardHeader, FormGroup, ButtonGroup, Input, Button 
-} from 'reactstrap'
+import { CardBody, Card, CardHeader, FormGroup, Input, Button } from 'reactstrap'
 import PropTypes from 'prop-types'
-
 import { CardMakerContainer } from './styled'
+import ColorButtons from './ColorButtons'
 
 const CardMaker = ({
   color,
@@ -36,24 +34,7 @@ const CardMaker = ({
           />
         </FormGroup>
         <FormGroup tag="fieldset">
-          <ButtonGroup>
-            <Button color="secondary" onClick={() => onColorTheme(`secondary`)}>
-              {color === `secondary` && `✅ `}
-              {`Default`}
-            </Button>
-            <Button color="danger" onClick={() => onColorTheme(`danger`)}>
-              {color === `danger` && `✅ `}
-              {`Red`}
-            </Button>
-            <Button color="success" onClick={() => onColorTheme(`success`)}>
-              {color === `success` && `✅ `}
-              {`Green`}
-            </Button>
-            <Button color="warning" onClick={() => onColorTheme(`warning`)}>
-              {color === `warning` && `✅ `}
-              {`Yellow`}
-            </Button>
-          </ButtonGroup>
+          <ColorButtons color={color} onColorTheme={onColorTheme} />
         </FormGroup>
         <FormGroup className="d-flex flex-column">
           <Button
@@ -73,7 +54,7 @@ const CardMaker = ({
 CardMaker.propTypes = {
   color: PropTypes.string.isRequired,
   comment: PropTypes.string.isRequired,
-  hasReachedLimit: PropTypes.bool.isRequired,
+  hasReachedLimit: PropTypes.bool,
   id: PropTypes.number,
   isEditing: PropTypes.bool,
   onAddNew: PropTypes.func,
@@ -85,6 +66,7 @@ CardMaker.propTypes = {
 }
 
 CardMaker.defaultProps = {
+  hasReachedLimit: false,
   id: 0,
   isEditing: false,
   onAddNew: () => {},

@@ -1,6 +1,6 @@
 import { persistReducer } from 'redux-persist'
 import localForage from 'localforage'
-import storageConfig from 'Store/storageConfig'
+import storageConfig from '~store/storageConfig'
 import reducer from './reducer'
 
 const config = {

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Scrim } from 'Components'
-import { AddToggler } from 'RenderProps'
+import { Scrim } from '~components'
+import { AddToggler } from '~renderProps'
 import OptionsBody from './OptionsBody'
 import { OptionsCloseIcon, OptionsOpenIcon, OptionsButton } from './styled'
 

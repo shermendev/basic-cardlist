@@ -1,13 +1,14 @@
+import { hot } from 'react-hot-loader/root'
 import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Header } from 'Components'
 import { Provider } from 'react-redux'
-import { store, persistor } from 'Store/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
+import { store, persistor } from '~store/store'
+import { Header } from '~components'
 import Head from './Head'
 
-const Home = React.lazy(() => import(`Pages/Home`))
-const NotFound = React.lazy(() => import(`Pages/NotFound/NotFound`))
+const Home = React.lazy(() => import(`~pages/Home`))
+const NotFound = React.lazy(() => import(`~pages/NotFound/NotFound`))
 
 const App = () => (
   <>
@@ -19,8 +20,9 @@ const App = () => (
           <Suspense fallback={null}>
             <Switch>
               <Route exact component={Home} path="/" />
-              {/* use render with unique key to force component to unmount, or else 404 animation will be shared between every 404 page */}
-              <Route render={props => <NotFound key={Date.now()} {...props} />} />
+              {/* use render with unique key to force component to unmount,
+              or else 404 animation will be shared between every 404 page */}
+              <Route render={({ location }) => <NotFound key={Date.now()} location={location} />} />
             </Switch>
           </Suspense>
         </BrowserRouter>
@@ -29,4 +31,4 @@ const App = () => (
   </>
 )
 
-export default App
+export default hot(App)

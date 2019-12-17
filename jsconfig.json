@@ -2,17 +2,18 @@
   "compilerOptions": {
     "jsx": "react",
     "target": "es6",
-    "baseUrl": "./",
+    "baseUrl": "./src/",
     "paths": {
-      "Hoc/*": ["./src/hoc/*"],
-      "Components/*": ["./src/components/*"],
-      "RenderProps/*": ["./src/render-props/*"],
-      "Pages/*": ["./src/pages/*"],
-      "Containers/*": ["./src/containers/*"],
-      "Img/*": ["./src/assets/img/*"],
-      "Icons/*": ["./src/assets/img/icons/*"],
-      "Store/*": ["./src/store/*"],
-      "Utils/*": ["./src/utils/*"]
+      "@@components/*": ["./components/*"],
+      "@@containers/*": ["./containers/*"],
+      "@@hoc/*": ["./hoc/*"],
+      "@@icons/*": ["./assets/img/icons/*"],
+      "@@img/*": ["./assets/img/*"],
+      "@@pages/*": ["./pages/*"],
+      "@@renderProps/*": ["./render-props/*"],
+      "@@store/*": ["./store/*"],
+      "@@styles/*": ["./styles/*"],
+      "@@utils/*": ["./utils/*"]
     }
   },
   "include": ["src/**/*"]

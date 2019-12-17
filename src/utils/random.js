@@ -1,38 +1,17 @@
-export function getRandomColor() {
+export const getRandomColor = () => {
   const randomColorIndex = Math.floor((Math.random() * 10) / 2.5)
-  let randomColor
+  const colors = [`secondary`, `danger`, `success`, `warning`]
 
-  switch (randomColorIndex) {
-    case 0:
-      randomColor = `secondary`
-      break
-    case 1:
-      randomColor = `danger`
-      break
-    case 2:
-      randomColor = `success`
-      break
-    case 3:
-      randomColor = `warning`
-      break
-    default:
-      randomColor = `secondary`
-      break
-  }
+  const randomColor = colors[randomColorIndex] || `secondary`
 
   return randomColor
 }
 
-export function getRandomPostId() {
-  return Math.floor(Math.random() * 100)
-}
+export const getRandomPostId = () => Math.floor(Math.random() * 100) || 1
 
-export function getRandomShouldExist() {
-  return Math.random() >= 0.5
-}
+export const getRandomShouldExist = () => Math.random() >= 0.5
 
-export function getRandomUrl() {
-  return `/${Math.random()
+export const getRandomUrl = () =>
+  `/${Math.random()
     .toString()
     .slice(2)}`
-}

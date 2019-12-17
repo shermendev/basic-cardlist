@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { edit, remove } from 'Store/cardBoard/actions'
+import { edit, remove } from '~store/cardBoard/actions'
 import TodoCard from './TodoCard'
 
 const mapDispatchToProps = {
@@ -7,5 +7,4 @@ const mapDispatchToProps = {
   onRemove: remove
 }
 
-export default connect(null,
-  mapDispatchToProps)(TodoCard)
+export default connect(null, mapDispatchToProps)(TodoCard)

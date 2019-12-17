@@ -1,7 +1,7 @@
 import React from 'react'
 import { Nav, NavItem } from 'reactstrap'
 import { NavLink as RouterNavLink } from 'react-router-dom'
-import { getRandomUrl } from 'Utils/random'
+import { getRandomUrl } from '~utils/random'
 import { Navbar, NavLink } from './styled'
 
 const Header = () => (

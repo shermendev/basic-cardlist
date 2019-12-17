@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 import { Button } from 'reactstrap'
 
-export const FetcherButton = styled(Button)(() => css`
+export const FetcherButton = styled(Button)(
+  () => css`
     border-radius: 50%;
     bottom: 15px;
     font-size: 24px;
@@ -13,4 +14,5 @@ export const FetcherButton = styled(Button)(() => css`
     text-align: center;
     width: 70px;
     z-index: 1;
-  `)
+  `
+)

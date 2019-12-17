@@ -1,7 +1,8 @@
-import { checkIfReachedLimit } from 'Utils'
-import { getRandomColor, getRandomShouldExist } from 'Utils/random'
 import { handleActions } from 'redux-actions'
-import { wrapActions } from 'Store/utils/wrapActions'
+import doEqual from 'fast-deep-equal'
+import { wrapActions } from '~store/utils/wrapActions'
+import { getRandomColor, getRandomShouldExist } from '~utils/random'
+import { checkIfReachedLimit } from '~utils/checkIfReachedLimit'
 import * as actionTypes from './actions'
 
 function toggleOrder({ ascending }) {
@@ -42,7 +43,6 @@ function purge({ list }) {
   if (list.length === 0) return null
 
   return {
-    hasReachedLimit: false,
     list: []
   }
 }
@@ -50,27 +50,34 @@ function purge({ list }) {
 function editSubmit({ currentCardToEdit, list }) {
   const { id } = currentCardToEdit
 
-  const newList = list.map(listItem => {
+  for (const [index, listItem] of list.entries()) {
     if (listItem.id === id) {
-      return {
-        ...listItem,
+      if (doEqual(listItem, currentCardToEdit)) {
+        return {
+          isEditing: false
+        }
+      }
+
+      const newList = [...list]
+
+      newList[index] = {
         ...currentCardToEdit
       }
-    }
 
-    return listItem
-  })
+      return {
+        isEditing: false,
+        list: newList
+      }
+    }
+  }
 
   return {
-    isEditing: false,
-    list: newList
+    isEditing: false
   }
 }
 
-function addNew({
-  color, comment, counter, hasReachedLimit, list, title 
-}) {
-  if (hasReachedLimit) return null
+function addNew({ color, comment, counter, list, title }) {
+  if (checkIfReachedLimit(list.length)) return null
 
   const newList = list.concat([
     {
@@ -88,7 +95,6 @@ function addNew({
     colorSelected: `default`,
     comment: ``,
     counter: newCounter,
-    hasReachedLimit: checkIfReachedLimit(newList.length),
     list: newList,
     title: ``
   }
@@ -107,7 +113,6 @@ function remove({ list }, { id }) {
   const newList = list.filter(key => key.id !== id)
 
   return {
-    hasReachedLimit: false,
     list: newList
   }
 }
@@ -127,14 +132,16 @@ function inputChange({ currentCardToEdit, isEditing }, { inputName, inputValue }
   }
 }
 
-function setFetcherColor(state, { fetcherColor }) {
+function setFetcherColor({ fetcherColor: currentFetcherColor }, { fetcherColor: newFetcherColor }) {
+  if (currentFetcherColor === newFetcherColor) return null
+
   return {
-    fetcherColor: fetcherColor
+    fetcherColor: newFetcherColor
   }
 }
 
-function fetchNew({ counter, hasReachedLimit, list }, { cardData, color }) {
-  if (hasReachedLimit) return null
+function fetchNew({ counter, list }, { cardData, color }) {
+  if (checkIfReachedLimit(list.length)) return null
 
   const card = {
     color,
@@ -147,7 +154,6 @@ function fetchNew({ counter, hasReachedLimit, list }, { cardData, color }) {
 
   return {
     counter: newCounter,
-    hasReachedLimit: checkIfReachedLimit(newList.length),
     list: newList
   }
 }
@@ -183,25 +189,26 @@ const initialState = {
     title: ``
   },
   fetcherColor: getRandomColor(),
-  hasReachedLimit: false,
   isEditing: false,
   list: [],
   title: ``
 }
 
-const reducer = handleActions(wrapActions({
-  [actionTypes.reset]: reset,
-  [actionTypes.edit]: edit,
-  [actionTypes.purge]: purge,
-  [actionTypes.editSubmit]: editSubmit,
-  [actionTypes.addNew]: addNew,
-  [actionTypes.toggleOrder]: toggleOrder,
-  [actionTypes.remove]: remove,
-  [actionTypes.inputChange]: inputChange,
-  [actionTypes.setFetcherColor]: setFetcherColor,
-  [actionTypes.fetchNew]: fetchNew,
-  [actionTypes.colorTheme]: colorTheme
-}),
-initialState)
+const reducer = handleActions(
+  wrapActions({
+    [actionTypes.reset]: reset,
+    [actionTypes.edit]: edit,
+    [actionTypes.purge]: purge,
+    [actionTypes.editSubmit]: editSubmit,
+    [actionTypes.addNew]: addNew,
+    [actionTypes.toggleOrder]: toggleOrder,
+    [actionTypes.remove]: remove,
+    [actionTypes.inputChange]: inputChange,
+    [actionTypes.setFetcherColor]: setFetcherColor,
+    [actionTypes.fetchNew]: fetchNew,
+    [actionTypes.colorTheme]: colorTheme
+  }),
+  initialState
+)
 
 export default reducer

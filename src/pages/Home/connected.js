@@ -1,15 +1,19 @@
 import { connect } from 'react-redux'
-import { addNew } from 'Store/cardBoard/actions'
+import { createSelector } from 'reselect'
+import { addNew } from '~store/cardBoard/actions'
 import Home from './Home'
+import { checkIfReachedLimit } from '~utils/checkIfReachedLimit'
 
-const mapStateToProps = ({ cardBoard: { hasReachedLimit } }) => {
+const getListLength = ({ cardBoard: { list } }) => list.length
+
+const mapStateToProps = createSelector([getListLength], listLength => {
   return {
-    hasReachedLimit
+    hasReachedLimit: checkIfReachedLimit(listLength)
   }
-}
+})
+
 const mapDispatchToProps = {
   onAddNew: addNew
 }
 
-export default connect(mapStateToProps,
-  mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { WatchResize } from 'RenderProps'
+import { WatchResize } from '~renderProps'
 import { ScrimBody, ScrimContainer } from './styled'
 
 const Scrim = ({ isOpen, location }) => (

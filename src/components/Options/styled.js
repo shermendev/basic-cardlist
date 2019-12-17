@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
-import { Cogs, Times } from 'styled-icons/fa-solid'
+import { Cogs, Times } from '@styled-icons/fa-solid'
 
-export const OptionsButton = styled.button(({ isOpen }) => css`
+export const OptionsButton = styled.button(
+  ({ isOpen }) => css`
     border: 0;
     border-radius: 50%;
     cursor: pointer;
@@ -17,7 +18,8 @@ export const OptionsButton = styled.button(({ isOpen }) => css`
     width: 70px;
     background-color: ${isOpen ? `transparent` : `#cff0ef`};
     z-index: ${isOpen ? `999` : `1`};
-  `)
+  `
+)
 
 export const OptionsOpenIcon = styled(Cogs)`
   ${iconStyles()}

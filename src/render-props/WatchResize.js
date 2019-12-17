@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 import { boundMethod } from 'autobind-decorator'
 
 class WatchResize extends Component {
-  static propTypes = {
-    render: PropTypes.func.isRequired
-  }
-
   state = {
     containerSize: 0
   }
@@ -40,6 +36,10 @@ class WatchResize extends Component {
 
     return <>{render(this.state)}</>
   }
+}
+
+WatchResize.propTypes = {
+  render: PropTypes.func.isRequired
 }
 
 export default WatchResize

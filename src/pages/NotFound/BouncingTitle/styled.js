@@ -1,7 +1,4 @@
-import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import { ReactComponent as SnowflakeSvg } from 'Icons/snowflake.svg'
-import { ReactComponent as FireSvg } from 'Icons/fire.svg'
 
 const rotateFun = keyframes`
   0% {
@@ -24,7 +21,8 @@ const rotateFun = keyframes`
     transform: rotate3d(1, 0, 0, 0deg) translateX(-100px);
   }`
 
-export const ErrorTitle = styled.h1(({ isFrozen }) => css`
+export const ErrorTitle = styled.h1(
+  ({ isFrozen }) => css`
     color: #333;
     font-size: 100px;
     animation: ${rotateFun} 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
@@ -32,9 +30,11 @@ export const ErrorTitle = styled.h1(({ isFrozen }) => css`
       css`
         animation-play-state: paused;
       `};
-  `)
+  `
+)
 
-export const AnimationToggler = styled.button(() => css`
+export const AnimationToggler = styled.button(
+  () => css`
     background: none;
     outline: none !important;
     cursor: pointer;
@@ -43,16 +43,5 @@ export const AnimationToggler = styled.button(() => css`
     border-radius: 100%;
     width: 60px;
     height: 60px;
-  `)
-
-const iconStyles = css`
-  width: 100%;
-  height: 100%;
-`
-
-const Snowflake = styled(SnowflakeSvg)(() => iconStyles)
-const Fire = styled(FireSvg)(() => iconStyles)
-
-// eslint-disable-next-line react/prop-types
-export const AnimationTogglerIcon = ({ isFrozen, ...props }) =>
-  isFrozen ? <Fire {...props} /> : <Snowflake {...props} />
+  `
+)

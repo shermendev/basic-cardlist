@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import cn from 'classnames'
 import { boundMethod } from 'autobind-decorator'
+import { CountDownMessage } from './styled'
 
 class CountDownRenderer extends Component {
-  static propTypes = {
-    completed: PropTypes.bool.isRequired,
-    milliseconds: PropTypes.number.isRequired,
-    seconds: PropTypes.string.isRequired
-  }
-
   state = {
     shouldRedirect: false
   }
@@ -33,7 +27,7 @@ class CountDownRenderer extends Component {
       this.setState({
         shouldRedirect: true
       })
-    }, 1000)
+    }, 1_000)
   }
 
   render() {
@@ -46,16 +40,14 @@ class CountDownRenderer extends Component {
 
     const message = completed ? redirect : `You will be redirected in ${seconds}:${preservedMilliseconds}`
 
-    return (
-      <div
-        className={cn({
-          'text-success': completed
-        })}
-      >
-        {message}
-      </div>
-    )
+    return <CountDownMessage completed={completed}>{message}</CountDownMessage>
   }
+}
+
+CountDownRenderer.propTypes = {
+  completed: PropTypes.bool.isRequired,
+  milliseconds: PropTypes.number.isRequired,
+  seconds: PropTypes.number.isRequired
 }
 
 function preserveMilliseconds(rawMilliseconds) {

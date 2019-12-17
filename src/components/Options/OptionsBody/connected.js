@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { purge, reset, toggleOrder } from 'Store/cardBoard/actions'
+import { purge, reset, toggleOrder } from '~store/cardBoard/actions'
 import OptionsBody from './OptionsBody'
 
 const mapStateToProps = ({ cardBoard: { ascending } }) => {
@@ -14,5 +14,4 @@ const mapDispatchToProps = {
   onToggleOrder: toggleOrder
 }
 
-export default connect(mapStateToProps,
-  mapDispatchToProps)(OptionsBody)
+export default connect(mapStateToProps, mapDispatchToProps)(OptionsBody)

@@ -1,9 +1,7 @@
 import React from 'react'
 import { Container, Col, Row } from 'reactstrap'
-import {
-  CardMaker, TodoCardList, Fetcher, Options, Modal, LimitAlert 
-} from 'Components'
 import PropTypes from 'prop-types'
+import { CardMaker, TodoCardList, Fetcher, Options, Modal, LimitAlert } from '~components'
 
 const Home = ({ hasReachedLimit, onAddNew }) => (
   <>
@@ -15,7 +13,7 @@ const Home = ({ hasReachedLimit, onAddNew }) => (
       </Row>
     </Container>
     <TodoCardList />
-    <Fetcher />
+    <Fetcher hasReachedLimit={hasReachedLimit} />
     <Options />
     {hasReachedLimit && <LimitAlert />}
     <Modal />

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CardMaker, Scrim } from 'Components'
+import { CardMaker, Scrim } from '~components'
 import { ModalContainer } from './styled'
 
 const Modal = ({ cardMakerProps, isOpen, onEditSubmit }) => (

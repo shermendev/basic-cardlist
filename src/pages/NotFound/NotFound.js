@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Button } from 'reactstrap'
 import ReactRouterPropTypes from 'react-router-prop-types'
 import Countdown from 'react-countdown-now'
-import { AddToggler } from 'RenderProps'
+import { AddToggler } from '~renderProps'
 import { ErrorMessage, RedirectCountDown } from './styled'
 import CountDownRenderer from './CountDownRenderer'
 import BouncingTitle from './BouncingTitle'
@@ -10,7 +10,7 @@ import BouncingTitle from './BouncingTitle'
 const NotFound = ({ location }) => (
   <Container>
     <Row>
-      <Col className="text-center mt-4">
+      <Col className="text-center mt-4 overflow-hidden">
         <BouncingTitle />
         <ErrorMessage>
           Page
@@ -25,10 +25,12 @@ const NotFound = ({ location }) => (
               ) : (
                 <>
                   <Countdown
-                    date={Date.now() + 5000}
+                    date={Date.now() + 5_000}
                     intervalDelay={16}
                     precision={2}
-                    renderer={props => <CountDownRenderer {...props} />}
+                    renderer={({ completed, milliseconds, seconds }) => (
+                      <CountDownRenderer completed={completed} milliseconds={milliseconds} seconds={seconds} />
+                    )}
                   />
                   <Button color="danger" onClick={handleStop}>
                     Do not redirect!

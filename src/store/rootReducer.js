@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import cardBoard from 'Store/cardBoard'
+import cardBoard from '~store/cardBoard'
 
 const rootReducer = combineReducers({
   cardBoard

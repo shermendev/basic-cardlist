@@ -1,13 +1,9 @@
 import React from 'react'
-import {
-  CardTitle, CardText, CardBody, Card, Col, CardHeader, Button 
-} from 'reactstrap'
+import { CardTitle, CardText, CardBody, Card, Col, CardHeader, Button } from 'reactstrap'
 import PropTypes from 'prop-types'
 import { TodoCardContainer } from './styled'
 
-const TodoCard = ({
-  color, comment, id, onEdit, onRemove, title 
-}) => {
+const TodoCard = ({ color, comment, id, onEdit, onRemove, title }) => {
   const hasTitle = Boolean(title)
   const hasComment = Boolean(comment)
   const fontClassesIfEmpty = `font-italic font-weight-light`

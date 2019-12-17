@@ -3,17 +3,8 @@ import PropTypes from 'prop-types'
 import { boundMethod } from 'autobind-decorator'
 
 class AddToggler extends Component {
-  static propTypes = {
-    render: PropTypes.func.isRequired
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      handler: this.handleToggle,
-      prop: false
-    }
+  state = {
+    prop: false
   }
 
   @boundMethod
@@ -28,8 +19,19 @@ class AddToggler extends Component {
   render() {
     const { render } = this.props
 
-    return <>{render(this.state)}</>
+    return (
+      <>
+        {render({
+          ...this.state,
+          handler: this.handleToggle
+        })}
+      </>
+    )
   }
+}
+
+AddToggler.propTypes = {
+  render: PropTypes.func.isRequired
 }
 
 export default AddToggler

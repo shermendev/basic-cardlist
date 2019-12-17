@@ -1,33 +1,15 @@
 import { connect } from 'react-redux'
-import { colorTheme, inputChange } from 'Store/cardBoard/actions'
-import { createSelector } from 'reselect'
+import { colorTheme, inputChange } from '~store/cardBoard/actions'
 import CardMaker from './CardMaker'
 
-const getColor = ({ cardBoard: { color } }) => color
-const getComment = ({ cardBoard: { comment } }) => comment
-const getTitle = ({ cardBoard: { title } }) => title
-const getParentProps = (state, parentProps) => {
-  const overridableParams = [`color`, `comment`, `title`]
-  const fromOwnProps = {}
-
-  for (const key of overridableParams) {
-    if (parentProps[key] === undefined) continue
-
-    fromOwnProps[key] = parentProps[key]
+const mapStateToProps = ({ cardBoard: { color, comment, title } }, ownProps) => {
+  return {
+    color,
+    comment,
+    title,
+    ...ownProps
   }
-
-  return Object.keys(fromOwnProps).length !== 0 ? fromOwnProps : null
 }
-
-const mapStateToProps = createSelector([getColor, getComment, getTitle, getParentProps],
-  (color, comment, title, parentProps) => {
-    return {
-      color,
-      comment,
-      title,
-      ...parentProps
-    }
-  })
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -37,5 +19,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps,
-  mapDispatchToProps)(CardMaker)
+export default connect(mapStateToProps, mapDispatchToProps)(CardMaker)
