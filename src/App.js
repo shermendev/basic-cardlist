@@ -16,10 +16,10 @@ const App = () => (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
-          <Route component={Header} path="/" />
+          <Route component={Header} path="/cardboard/" />
           <Suspense fallback={null}>
             <Switch>
-              <Route exact component={Home} path="/" />
+              <Route exact component={Home} path="/cardboard/" />
               {/* use render with unique key to force component to unmount,
               or else 404 animation will be shared between every 404 page */}
               <Route render={({ location }) => <NotFound key={Date.now()} location={location} />} />
