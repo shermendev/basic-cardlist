@@ -36,7 +36,7 @@ class CountDownRenderer extends Component {
 
     const preservedMilliseconds = preserveMilliseconds(milliseconds)
 
-    const redirect = shouldRedirect ? <Redirect to="/" /> : `Redirecting to the HomePage!`
+    const redirect = shouldRedirect ? <Redirect to="/cardboard/" /> : `Redirecting to the HomePage!`
 
     const message = completed ? redirect : `You will be redirected in ${seconds}:${preservedMilliseconds}`
 
