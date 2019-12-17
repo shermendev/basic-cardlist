@@ -8,7 +8,7 @@ const Header = () => (
   <Navbar>
     <Nav>
       <NavItem>
-        <NavLink exact activeClassName="bg-primary" className="text-white" tag={RouterNavLink} to="/">
+        <NavLink exact activeClassName="bg-primary" className="text-white" tag={RouterNavLink} to="/cardboard/">
           Home
         </NavLink>
       </NavItem>
