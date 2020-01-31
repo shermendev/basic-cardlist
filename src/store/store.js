@@ -1,21 +1,25 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'
 import { persistStore } from 'redux-persist'
-import rootReducer from '~store/rootReducer'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware, connectRouter } from 'connected-react-router'
+import cardBoard from '~store/slices/cardBoard'
+import errors from '~store/slices/errors'
 
-let _store
+export const history = createBrowserHistory()
 
-if (process.env.NODE_ENV !== `production`) {
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?? compose
+export const store = configureStore({
+  devTools: process.env.NODE_ENV !== `production`,
+  middleware: [routerMiddleware(history), thunk],
+  reducer: {
+    cardBoard,
+    errors,
+    router: connectRouter(history)
+  }
+})
 
-  _store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
-} else {
-  _store = createStore(rootReducer, compose(applyMiddleware(thunk)))
-}
-
-export const store = _store
-export const persistor = persistStore(store)
-
-import(`~store/syncStore`)
-  .then(({ default: syncStore }) => syncStore(store))
-  .catch(null)
+export const persistor = persistStore(store, null, () => {
+  import(`./syncStore`)
+    .then(({ default: syncStore }) => syncStore(store))
+    .catch(null)
+})

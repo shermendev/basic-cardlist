@@ -1,14 +1,21 @@
 import React from 'react'
-import { Nav, NavItem } from 'reactstrap'
+import { NavItem } from 'reactstrap'
 import { NavLink as RouterNavLink } from 'react-router-dom'
-import { getRandomUrl } from '~utils/random'
-import { Navbar, NavLink } from './styled'
+import { Navbar, NavLink, Nav } from './styled'
+import { homeRoute } from '~config/home-route'
+
+const getRandomUrl = () =>
+  homeRoute +
+  Math.random()
+    .toString()
+    .slice(-7, -2)
+    .padEnd(5, `0`)
 
 const Header = () => (
   <Navbar>
     <Nav>
       <NavItem>
-        <NavLink exact activeClassName="bg-primary" className="text-white" tag={RouterNavLink} to="/cardboard/">
+        <NavLink exact activeClassName="bg-primary" className="text-white" tag={RouterNavLink} to={homeRoute}>
           Home
         </NavLink>
       </NavItem>
@@ -21,4 +28,4 @@ const Header = () => (
   </Navbar>
 )
 
-export default React.memo(Header)
+export default Header

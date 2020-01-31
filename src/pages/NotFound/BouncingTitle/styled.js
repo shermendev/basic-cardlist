@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components'
+import { mediaLess } from '~utils/styled'
 
 const rotateFun = keyframes`
   0% {
@@ -26,6 +27,12 @@ export const ErrorTitle = styled.h1(
     color: #333;
     font-size: 100px;
     animation: ${rotateFun} 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    ${mediaLess(768)(css`
+      font-size: 80px;
+    `)}
+    ${mediaLess(560)(css`
+      font-size: 60px;
+    `)}
     ${isFrozen &&
       css`
         animation-play-state: paused;

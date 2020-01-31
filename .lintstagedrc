@@ -1,20 +1,12 @@
 {
-  "src/**/*.js": [
-    "yarn run fix:obj",
-    "git add"
-  ],
-  "src/**/styled.js": [
-    "stylelint",
-    "git add"
-  ],
+  "src/**/*.js": "yarn run fix:obj",
+  "src/**/styled.js": "stylelint",
   "*.js": [
     "prettier --write",
-    "eslint --fix --max-warnings=0 --ignore-pattern '!.eslintrc.js'",
-    "git add"
+    "eslint --fix --max-warnings=0 --ignore-pattern '!.eslintrc.js'"
   ],
   "*.sass": [
     "yarn run sass-lint:fix",
-    "yarn run sass-lint",
-    "git add"
+    "yarn run sass-lint"
   ]
 }

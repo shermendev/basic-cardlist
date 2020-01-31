@@ -1,47 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { boundMethod } from 'autobind-decorator'
-import { CountDownMessage } from './styled'
+import { Message } from './styled'
+import { homeRoute } from '~config/home-route'
+import { useShouldRedirect } from './hooks'
 
-class CountDownRenderer extends Component {
-  state = {
-    shouldRedirect: false
-  }
+const CountDownRenderer = ({ completed, milliseconds, seconds }) => {
+  const shouldRedirect = useShouldRedirect(completed)
 
-  componentDidUpdate(prevProps) {
-    const { completed } = this.props
+  const preservedMilliseconds = preserveMilliseconds(milliseconds)
 
-    if (completed && completed !== prevProps.completed) {
-      this.setDeferredRedirect()
-    }
-  }
+  const redirect = shouldRedirect ? <Redirect to={homeRoute} /> : `Redirecting to the HomePage!`
 
-  componentWillUnmount() {
-    clearTimeout(this.timeOut)
-  }
+  const message = completed ? redirect : `You will be redirected in ${seconds}:${preservedMilliseconds}`
 
-  @boundMethod
-  setDeferredRedirect() {
-    this.timeOut = setTimeout(() => {
-      this.setState({
-        shouldRedirect: true
-      })
-    }, 1_000)
-  }
-
-  render() {
-    const { shouldRedirect } = this.state
-    const { completed, milliseconds, seconds } = this.props
-
-    const preservedMilliseconds = preserveMilliseconds(milliseconds)
-
-    const redirect = shouldRedirect ? <Redirect to="/cardboard/" /> : `Redirecting to the HomePage!`
-
-    const message = completed ? redirect : `You will be redirected in ${seconds}:${preservedMilliseconds}`
-
-    return <CountDownMessage completed={completed}>{message}</CountDownMessage>
-  }
+  return <Message completed={completed}>{message}</Message>
 }
 
 CountDownRenderer.propTypes = {
@@ -59,4 +32,4 @@ function preserveMilliseconds(rawMilliseconds) {
   return milliseconds
 }
 
-export default React.memo(CountDownRenderer)
+export default CountDownRenderer

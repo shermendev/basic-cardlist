@@ -18,8 +18,7 @@ module.exports = {
       [
         'transform-react-remove-prop-types',
         {
-          removeImport: true,
-          additionalLibraries: ['react-router-prop-types']
+          removeImport: true
         }
       ]
     ]

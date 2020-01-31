@@ -1,4 +1,7 @@
+/* eslint-disable no-param-reassign */
 const reactHotReloadPlugin = require('craco-plugin-react-hot-reload')
+const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
+const { whenProd } = require('@craco/craco')
 const { getJestAliases, getWebpackAliases } = require('./aliases')
 
 module.exports = {
@@ -9,12 +12,6 @@ module.exports = {
   ],
   babel: {
     plugins: [
-      [
-        '@babel/plugin-proposal-decorators',
-        {
-          legacy: true
-        }
-      ],
       [
         'babel-plugin-styled-components',
         {
@@ -35,6 +32,20 @@ module.exports = {
   },
   webpack: {
     alias: getWebpackAliases(),
-    plugins: []
+    plugins: [],
+    configure: webpackConfig => {
+      webpackConfig.resolve.plugins.push(
+        new DirectoryNamedWebpackPlugin({
+          exclude: /node_modules/,
+          honorIndex: true
+        })
+      )
+
+      whenProd(() => {
+        webpackConfig.devtool = false
+      })
+
+      return webpackConfig
+    }
   }
 }

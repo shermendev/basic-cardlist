@@ -2,7 +2,7 @@ import localForage from 'localforage'
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import { BroadcastChannel } from 'broadcast-channel'
 import doEqual from 'fast-deep-equal'
-import storageConfig from '~store/storageConfig'
+import storageConfig from './storageConfig'
 
 const syncStore = store => {
   const channel = new BroadcastChannel(`Sync data between tabs`, {

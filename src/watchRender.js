@@ -2,13 +2,20 @@ import whyDidYouRender from '@welldone-software/why-did-you-render/dist/no-class
 
 const watchRender = React =>
   whyDidYouRender(React, {
-    exclude: [/^CardHeader|WatchResize|CountDownRenderer/],
+    collapseGroups: true,
+    exclude: [/^CardHeader|FormGroup|CardBody/],
     hotReloadBufferMs: 1_500,
     include: [
-      /^CardMaker|ColorButtons|Fetcher|Header|LimitAlert|Modal|Options|OptionsBody|Scrim|TodoCardList|TodoCard/,
-      /^Home|NotFound|BouncingTitle|AnimationTogglerIcon/,
-      /^AddToggler/,
-      /^App|Head/,
+      // components
+      /^Header|Head/,
+      // Home
+      /^CardMaker|ColorButtons|Fetcher|Home|LimitAlert|Modal|Options|Body|Scrim|TodoCards|TodoCard|ErrorAlerts/,
+      /^Spinners/,
+      // NotFound
+      /^NotFound|BouncingTitle|AnimationTogglerIcon/,
+      // root
+      /^App/,
+      // redux
       /^ConnectFunction/
     ]
   })

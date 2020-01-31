@@ -1,5 +1,5 @@
 const config = {
-  cardBoard: [`ascending`, `counter`, `list`]
+  cardBoard: [`ascending`, `counter`, `cards`]
 }
 
 export default config

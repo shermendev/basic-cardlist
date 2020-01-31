@@ -2,15 +2,18 @@ const path = require('path')
 
 const aliases = [
   ['components', 'src/components'],
-  ['hoc', 'src/hoc'],
-  ['renderProps', 'src/render-props'],
-  ['pages', 'src/pages'],
+  ['config', 'src/config'],
   ['containers', 'src/containers'],
-  ['img', 'src/assets/img'],
+  ['context', 'src/context'],
+  ['hoc', 'src/hoc'],
+  ['hooks', 'src/hooks'],
   ['icons', 'src/assets/img/icons'],
+  ['img', 'src/assets/img'],
+  ['pages', 'src/pages'],
+  ['renderProps', 'src/render-props'],
   ['store', 'src/store'],
-  ['utils', 'src/utils'],
-  ['styles', 'src/styles']
+  ['styles', 'src/styles'],
+  ['utils', 'src/utils']
 ]
 
 const getJestAliases = () => {

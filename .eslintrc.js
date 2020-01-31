@@ -35,6 +35,8 @@ module.exports = {
     }
   },
   rules: {
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
     'no-underscore-dangle': 'off',
     'array-func/prefer-array-from': 'off',
     'arrow-body-style': [
@@ -47,6 +49,7 @@ module.exports = {
     'arrow-parens': 'off',
     'comma-dangle': 'off',
     'consistent-return': 'off',
+    'no-continue': 'off',
     'implicit-arrow-linebreak': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
@@ -120,7 +123,7 @@ module.exports = {
         SwitchCase: 1
       }
     ],
-    semi: 'off'
+    semi: ['error', 'never']
   },
   overrides: [
     {
@@ -132,7 +135,6 @@ module.exports = {
         'react/destructuring-assignment': 'warn',
         'react/display-name': 'off',
         'react/jsx-filename-extension': 'off',
-        'react/jsx-props-no-spreading': 'off',
         'react/jsx-sort-props': [
           'warn',
           {
@@ -141,17 +143,22 @@ module.exports = {
             shorthandFirst: true
           }
         ],
-        'react/no-array-index-key': 'off',
-        'react/prop-types': [
-          'error',
-          {
-            ignore: ['children']
-          }
-        ],
         'react/state-in-constructor': ['error', 'never'],
         // cssCheckbox library breaks with nesting
         'jsx-a11y/label-has-associated-control': 'off',
         'jsx-a11y/label-has-for': 'off'
+      }
+    },
+    {
+      files: ['redux.js'],
+      rules: {
+        'no-shadow': 'off'
+      }
+    },
+    {
+      files: ['**/slices/*.js'],
+      rules: {
+        'no-param-reassign': 'off'
       }
     }
   ]
