@@ -4,7 +4,7 @@ Simple card maker app with React, Redux and Styled-Components.
 
 ## Features
 
-Create a new card using a simple form or generate one with a random data from [jsonplaceholder](https://jsonplaceholder.typicode.com/) to do it for you. Ability to edit/remove/sort the cards.
+Create a new card using a simple form or generate one by fetching random data from [jsonplaceholder](https://jsonplaceholder.typicode.com/) to do it for you. Ability to edit/remove/sort the cards. Ability to cancel the fetch requests and display the errors to the user if something goes wrong.
 
 Data is stored in IndexedDB and synced between tabs in your browser.
 
