@@ -13,16 +13,15 @@ const NotFound = React.lazy(() => import(`~pages/NotFound`))
 
 const App = () => (
   <>
-    <Head />
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <ConnectedRouter history={history}>
+          <Head />
           <Route component={Header} path={homeRoute} />
           <Suspense fallback={null}>
             <Switch>
               <Route exact component={Home} path={homeRoute} />
-              {/* use render with unique key to force component to unmount,
-              or else 404 animation will be shared between every 404 page */}
+              {/* Use render with a unique key to force the component to unmount */}
               <Route render={() => <NotFound key={Date.now()} />} />
             </Switch>
           </Suspense>

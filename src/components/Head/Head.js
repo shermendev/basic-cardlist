@@ -1,11 +1,17 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { useLocation } from 'react-router-dom'
 
-const Head = () => (
-  <Helmet>
-    <title>Cardboard</title>
-    <script src="//cdn.polyfill.io/v2/polyfill.min.js" />
-  </Helmet>
-)
+const Head = () => {
+  const { pathname } = useLocation()
+
+  const pageTitle = pathname.length > 1 ? `Cardboard - ${pathname.slice(1)}` : `Cardboard`
+
+  return (
+    <Helmet>
+      <title>{pageTitle}</title>
+    </Helmet>
+  )
+}
 
 export default Head
