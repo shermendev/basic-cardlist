@@ -1,5 +1,3 @@
-const { getEslintAliases } = require('./config/aliases')
-
 module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
@@ -29,11 +27,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:unicorn/recommended'
   ],
-  settings: {
-    'import/resolver': {
-      alias: getEslintAliases()
-    }
-  },
   rules: {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
