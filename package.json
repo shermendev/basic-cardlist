@@ -12,7 +12,7 @@
     "@styled-icons/fa-solid": "^9.3.0",
     "@styled-icons/icomoon": "^9.3.0",
     "await-to-js": "^2.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "broadcast-channel": "^3.0.4",
     "connected-react-router": "^6.7.0",
